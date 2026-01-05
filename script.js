@@ -2,7 +2,7 @@ $(document).ready(() => {
 	$('#documentacao').on('click', () => {
         //$('#pagina').load('documentacao.html')
 
-        $.post('documentacao.html', data => {
+        $.get('documentacao.html', data => {
             $('#pagina').html(data)
         })
     })
@@ -10,7 +10,7 @@ $(document).ready(() => {
     $('#suporte').on('click', () => {
         //$('#pagina').load('suporte.html')
 
-        $.post('suporte.html', data => {
+        $.get('suporte.html', data => {
             $('#pagina').html(data)
         })
     })
