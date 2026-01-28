@@ -6,6 +6,12 @@ class Dashboard {
     public $data_fim;
     public $numeroVendas;
     public $totalVendas;
+    public $clientesAtivos;
+    public $clientesInativos;
+    public $totalReclamacoes;
+    public $totalElogios;
+    public $totalSugestoes;
+    public $totalDespesas;
 
     public function __get($atributo) {
         return $this->$atributo;
@@ -70,6 +76,15 @@ class Bd {
 
         return $stmt->fetch(PDO::FETCH_OBJ)->total_vendas;
     }
+
+    public function getClientesAtivos() {
+        $query = 'SELECT COUNT(*) as clientes_ativos FROM tb_clientes WHERE cliente_ativo = 1';
+
+        $stmt = $this->conexao->prepare($query);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_OBJ)->clientes_ativos;
+    }
 }
 
 $dashboard = new Dashboard();
@@ -88,6 +103,7 @@ $bd = new Bd($conexao, $dashboard);
 
 $dashboard->__set('numeroVendas', $bd->getNumeroVendas());
 $dashboard->__set('totalVendas', $bd->getTotalVendas());
+$dashboard->__set('clientesAtivos', $bd->getClientesAtivos());
 
 echo json_encode($dashboard);
 ?>
